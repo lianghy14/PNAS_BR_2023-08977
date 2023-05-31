@@ -37,7 +37,7 @@ The Seoul Halloween crowd-crush disaster, which occurred in an alleyway of the I
 
 According to the official report, over 300 victims were concentrated in an 18.24 m^2 (5.7 m * 3.2 m) area of the alleyway. A conceptual layout of the alleyway and the aforementioned area are depicted as follows.
 
-![alt text](https://github.com/lianghy14/PNAS_BR_2023-08977/blob/dc293bd0ffe8e6adefaed36886b551610ce034f8/Figures/fig_concept.pdf)
+![alt text](https://github.com/lianghy14/PNAS_BR_2023-08977/blob/dc293bd0ffe8e6adefaed36886b551610ce034f8/Figures/fig_concept.png)
 
 This project includes all source codings and simulation results of the Seoul Halloween crowd-crush in 2022
 
