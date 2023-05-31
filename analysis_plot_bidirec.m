@@ -83,30 +83,38 @@ for i = 1:nx_ex3
     end
 end
 
-h_i = 0.5;
-x_i = (area_cal(1,1)+0.5*h_i):h_i:(area_cal(1,2)-0.5*h_i);
-y_i = (area_cal(2,2)-0.5*h_i):-h_i:(area_cal(2,1)+0.5*h_i);
-[X_i,Y_i] = meshgrid(x_i,y_i);
 
 %% IC for density potential
-fprintf('Start Ploting---------------------------------------------\n');
 
+fprintf('Start Ploting---------------------------------------------\n');
+color_map_1=[linspace(0,1,100)',linspace(1,0,100)',linspace(0,0,100)'];
 writerObj = VideoWriter([dir_data '00simulation.avi']);
 writerObj.Quality = 100;
 writerObj.FrameRate = 5;
 open(writerObj);
 f_num = 1;
-x1_i = 0/h_i+1;
-x2_i = area_cal(1,2)/h_i;
-x_plot = 1/2*h_i:h_i:(area_cal(1,2)-1/2*h_i);
+x1 = 0/h+1;
+x2 = area_cal(1,2)/h;
+x_plot = 1/2*h:h:(area_cal(1,2)-1/2*h);
 for t = tStart:300:tEnd
     load ([dir_data num2str(Record_dt) '_' num2str(t/Record_dt) '.mat']);
-    density_com = sum(Record_Q(:,:,1,:,Record_dt),4);
-    density_com = gfuns.Boundary_value(x,y,density_com,boundary_H{1},nan);
-    density_interp = interp2(X,Y,density_com,X_i,Y_i);
-    fig = figure(1);
-    imagesc(x_plot,y_i, density_interp(:,x1_i:x2_i),'alphadata',~isnan(density_interp(:,x1_i:x2_i))); 
-    colormap Jet; set(gca,'YDir','normal','color',0*[1 1 1]); caxis([0 10]);
+    density_com_1 = zeros(ny,nx);
+    density_com_2 = zeros(ny,nx);
+    for i = 1:n_OD
+        switch i
+            case {4,5,6}
+                density_com_1 = density_com_1 + Record_Q(:,:,1,i,Record_dt);
+            case {1,2,3}
+                density_com_2 = density_com_2 + Record_Q(:,:,1,i,Record_dt);
+        end
+    end
+    density_com_1 = gfuns.Boundary_value(x,y,density_com_1,boundary_H{1},nan);
+    density_com_2 = gfuns.Boundary_value(x,y,density_com_2,boundary_H{1},nan);
+    density_bi = (density_com_2 - density_com_1)./(density_com_1 + density_com_2);
+
+
+    fig = figure(); imagesc(x_plot,y,density_bi(:,x1:x2),'alphadata',~isnan(density_bi(:,x1:x2)));
+    colormap(color_map_1); set(gca,'YDir','normal','color',0*[1 1 1]);caxis([-1 1]);
     fig_colorbar = colorbar;
     axis([30,55,0,area_cal(2,2)]);
 %         title(['Time(s): ',num2str(t)])
@@ -114,7 +122,7 @@ for t = tStart:300:tEnd
     ylabel('y (m)');
     set(fig,'unit','centimeters','position',[10 10 4 5]);
     set(gca, 'LooseInset', [0,0,0,0]);   
-    print(fig, '-depsc',['C:\Users\Administrator\OneDrive - The University of Hong Kong\03_PhD_1\05 Paper04\manuscript\figures\density' num2str(t)]);
+    print(fig, '-depsc',['C:\Users\Administrator\OneDrive - The University of Hong Kong\03_PhD_1\05 Paper04\manuscript\figures\bidirec' num2str(t)]);
     
     F=getframe(gcf);
     [I,map]=rgb2ind(frame2im(getframe(gcf)),256);
@@ -128,4 +136,3 @@ for t = tStart:300:tEnd
     writeVideo(writerObj,F);
 end
 close(writerObj);
-
