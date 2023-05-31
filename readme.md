@@ -44,7 +44,7 @@ Based on empirical analysis, the numerical simulation is performed over a $104\t
 ![alt text](https://github.com/lianghy14/PNAS_BR_2023-08977/blob/9030648d4a6f1568b46adebfa908df0fb239ea01/Figures/fig_layout1.png)
 ![alt text](https://github.com/lianghy14/PNAS_BR_2023-08977/blob/9030648d4a6f1568b46adebfa908df0fb239ea01/Figures/fig_layout2.png)
 
-This project includes all source codings and simulation results of the Seoul Halloween crowd-crush.
+This project includes all source codings and simulation results of the Seoul Halloween crowd-crush. Since the orginal data is too large, only visualized plots of density at every 60 seconds is included in the `Results`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -63,7 +63,7 @@ The codings run on MATLAB with FORTRAN complier. The following software is requi
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Run the 'MAT_TVDRK2.m' in MATLAB to start the simulation. Simulation results will be recorded in '\Case study LTY\LTY20230413\'.
+Run the `MAT_TVDRK2.m` in MATLAB to start the simulation. Simulation results will be recorded in `Results`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

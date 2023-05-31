@@ -74,7 +74,7 @@ switch day
         for i = 1:6
             boundary_H{i} = {'Rectangle',4,[-5 -5;x_max+5 0],[-5 y_max;x_max+5 y_max+5],[-5 wm1;40 y_max-wm2],[44 wm1;x_max+5 y_max-wm2]};
         end
-        dir_data = ['\Case study LTY\LTY20230413\'];
+        dir_data = 'Results\';
 end
 end
 %% Layout
