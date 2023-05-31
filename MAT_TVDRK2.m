@@ -40,7 +40,7 @@ ydet = round(ydet);
 
 %% Simulation period
 tStart      =   0; % 60,120,180,...
-tEnd        =   18000;
+tEnd        =   14400;
 gfuns       =   functions_given;
 pfuns       =   functions_plot;
 
@@ -106,7 +106,7 @@ while (t<=tEnd)
         Record_F2(:,:,:,rn)     =   F2_state(4:end-3,4:end-3,:);
         rn  =   rn+1;
         if (mod(t,Record_dt)==0)
-            fig = figure('Visible','off');
+            fig = figure('Visible','on');
             plotrange=[area_cal(1,1),area_cal(1,2),area_cal(2,1),area_cal(2,2),0,10];
             for i_OD = 1:n_OD
                 density = Record_Q(:,:,1,i_OD,Record_dt);
